@@ -1,7 +1,35 @@
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
+sequenceDiagram
+    participant browser
+    participant server
+Note left of browser: The user will submit the new note 
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    Note right of browser: After sending the new note, the server receives it and adds it,
+    Note right of browser:  then sends the URL/for a reload of the page 
+    server-->>browser: URL redirect
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: Page reload
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: main.css
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server 
+    server-->>browser: main.js
+    deactivate server
+note left of browser: Got both the css and the js
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server 
+note right of server: Request to get the list of notes
+    server-->>browser: returns the content + the date
+    deactivate server
+
+    
+
+   
