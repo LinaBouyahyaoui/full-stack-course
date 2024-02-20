@@ -30,6 +30,7 @@ note right of server: Request to get the list of notes
     server-->>browser: returns the content + the date
     deactivate server
 
+
     
 
    
